@@ -175,14 +175,14 @@ const[Position, setPosition] =useState('');
       </form>
 
       {/* Add some UI to display the generated form data if needed */}
-      {/* <div>
+      <div>
         <h2>Generated Certificates:</h2>
         <ul>
           {Form.map((item, index) => (
             <li key={index}>{item.name} - {item.role}</li>
           ))}
         </ul>
-      </div> */}
+      </div>
       <ToastContainer/>
     </>
   );

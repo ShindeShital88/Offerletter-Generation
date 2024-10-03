@@ -17,10 +17,13 @@ function Navbar() {
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active space" aria-current="page" className='home' href="/CertificateForm">Form</a>
+                <a class="nav-link active space" aria-current="page" className='home' href="/">Form</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active space" aria-current="page" className='home' href="/InternshipOffer">Certificate</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active space" aria-current="page" className='home' href="/OfferletterData">OfferletterData</a>
               </li>
             
              

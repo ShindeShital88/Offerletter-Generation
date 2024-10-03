@@ -84,6 +84,26 @@ certificate.get('/form', async (req, res) => {
     }
   });
 
+
+  certificate.delete('/form/:_id', async(req, res)=>{
+    const {_id} =req.params;
+    const deletedata= await Form.deleteOne({_id:_id})
+    res.json({
+
+        data:deletedata,
+        msg:"id is deleted"
+    })
+ })
+
+
+
+
+
+
+
+
+
+
 // Loginuser code start
 
 

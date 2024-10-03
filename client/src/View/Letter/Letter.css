@@ -1,5 +1,5 @@
 .offerletter{
-    height: 300vh;
+    height: 350vh;
     width: 65vw;
     border: 1px solid;
     align-items: center;
@@ -27,10 +27,12 @@ display: flex;
 justify-content: space-around;
 }
 .mobileno{
-    margin-top: -2px;
-    color: white;
-    font: bold;
+    
+  color: white;
+ /* font-size: small; */
+    /* font: bold; */
     /* margin-left: 10vw; */
+    padding-bottom:10px;
 }
 .head-part{
     color:white;
@@ -62,7 +64,7 @@ justify-content: space-around;
 }
 .print-button{
     height:6vh;
-    width: 10vw;
+    width: 15vw;
     border: 2px solid;
     background-color: rgb(92, 148, 212);
     border-radius: 10px;
