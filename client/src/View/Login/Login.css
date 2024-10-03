@@ -1,0 +1,45 @@
+.main-login{
+    text-align: center;
+   /* font-weight:; */
+   font-size:50px;
+   
+}
+
+
+
+.login-div{
+    height:60vh;
+    width:35vw;
+    /* border: 1px solid; */
+    box-shadow: 1px 1px 15px 1px rgb(201, 199, 199);
+    margin: auto;
+    border-radius: 10px;
+    /* margin-top: 150px; */
+    
+ 
+}
+.login{
+font-size:x-large;
+font-weight:400;
+text-align: center;
+margin-top:100px;
+}
+.name-input{
+    margin-top:10vh;
+    margin-left: 70px;
+    height:50px;
+    width: 25vw;
+    font-size: larger;
+    text-align: center;
+}
+.btn{
+    height: 50px;
+    width: 150px;
+    margin-left: 13vw;
+    margin-top: 50px;
+  border-radius: 15px;
+  background-color: rgb(92, 148, 212);
+  font-size: larger;
+  color: white;
+  font-weight: 700;
+}

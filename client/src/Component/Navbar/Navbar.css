@@ -1,0 +1,34 @@
+.barmain {
+    background-color: #8EC5FC;
+    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+    
+    width: 100vw;
+    height: 80px;
+    align-content: center;
+}
+
+.space {
+    margin-left: 40px;
+    width: 110px;
+    text-align: center;
+    transition: 4s;
+}
+
+/* .space:hover{
+    background-color: #9c3353;
+color: white;
+} */
+.logomain {
+    height: 150px;
+    width: 150px;
+    border-radius: 50px;
+}
+
+.home {
+    font-size: 20px;
+    font-weight: 550;
+    font-family: Arial, Helvetica, sans-serif;
+    color:black;
+    margin-left:40px;
+    text-decoration: none;
+}
