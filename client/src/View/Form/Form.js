@@ -4,6 +4,7 @@ import "./Form.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../../Component/Navbar/Navbar";
+import { useNavigate } from "react-router-dom";
 
 export default function CertificateForm() {
   const [Form, setForm] = useState([]);
@@ -12,24 +13,28 @@ export default function CertificateForm() {
   const [startdate, setStartdate] = useState("");
   const [enddate, setEnddate] = useState("");
   const [role, setRole] = useState("");
-  const [stipend, setStipend] = useState("");
+  const [start, setStart] = useState("");
+  const [end, setEnd] = useState("");
   const [acceptancedate, setAcceptancedate] = useState("");
   const [Position, setPosition] = useState("");
-
   const [range, setRange] = useState("");
+
+  const navigate = useNavigate();
 
   const Generate = async (event) => {
     event.preventDefault(); // Prevent page reload
 
     try {
-      await axios.post('http://localhost:4000/api/formRoutes/form', {
+      await axios.post("http://localhost:4000/api/formRoutes/form", {
         name: name,
         date_of_birth: date_of_birth,
         startdate: startdate,
         enddate: enddate,
         role: role,
         Position: Position,
-        stipend: stipend,
+        range: range,
+        start: start,
+        end: end,
         acceptancedate: acceptancedate,
       });
 
@@ -42,30 +47,20 @@ export default function CertificateForm() {
       setEnddate("");
       setRole("");
       setPosition("");
-      setStipend("");
+      setRange("");
+      setStart("");
+      setEnd("");
       setAcceptancedate("");
 
       // Fetch the updated data after submission
-      getdata();
+      setTimeout(() => {
+        navigate(`/InternshipOffer`);
+      }, 5000);
     } catch (e) {
       console.log(e.message);
       toast.error("Failed to generate certificate");
     }
   };
-
-  const getdata = async () => {
-    try {
-      const alldata = await axios.get("http://localhost:4000/form");
-      console.log(alldata.data.data);
-      setForm(alldata.data.data);
-    } catch (e) {
-      console.error("Failed to fetch data", e);
-    }
-  };
-
-  useEffect(() => {
-    getdata();
-  }, []);
 
   return (
     <>
@@ -148,12 +143,15 @@ export default function CertificateForm() {
                 <option value="">Select Position</option>
                 <option value="Internship">Internship</option>
                 <option value="Employee">Employee</option>
+                <option value="Team Leader">Team Leader</option>
+                <option value="Project Manager">Project Manager</option>
+                <option value="Senior Project Manager">Senior Project Manager</option>
               </select>
             </div>
 
             <div>
               <span className="name" htmlFor="role">
-              Role:
+                Role:
               </span>
               <br />
               <select
@@ -165,7 +163,9 @@ export default function CertificateForm() {
                 className="allinput"
               >
                 <option value="">Select Role</option>
-                <option value="Full Stack Developer">Full Stack Developer</option>
+                <option value="Full Stack Developer">
+                  Full Stack Developer
+                </option>
                 <option value="Frontend Developer">Frontend Developer</option>
                 <option value="Backend Developer">Backend Developer</option>
                 <option value="UI/UX Developer">UI/UX Developer</option>
@@ -174,27 +174,6 @@ export default function CertificateForm() {
                 <option value="DevOps Developer">DevOps Developer</option>
               </select>
             </div>
-
-            {/* <div>
-              <span className="name"> Role :</span> <br />
-              <input
-                type="text"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                className="allinput"
-                placeholder="Role"
-              />
-            </div> */}
-            {/* <div>
-              <span className="name"> Position :</span> <br />
-              <input
-                type="text"
-                value={Position}
-                onChange={(e) => setPosition(e.target.value)}
-                className="allinput"
-                placeholder="Position"
-              />
-            </div> */}
           </div>
 
           <div className="block">
@@ -206,6 +185,7 @@ export default function CertificateForm() {
                 onChange={(e) => setAcceptancedate(e.target.value)}
                 className="allinput"
                 placeholder="Acceptance Date"
+                required
               />
             </div>
 
@@ -236,10 +216,11 @@ export default function CertificateForm() {
                 <span className="name"> Salary :</span> <br />
                 <input
                   type="text"
-                  value={stipend}
-                  onChange={(e) => setStipend(e.target.value)}
+                  value={start}
+                  onChange={(e) => setStart(e.target.value)}
                   className="allinput"
                   placeholder="Salary"
+                  required
                 />
               </div>
             </div>
@@ -249,10 +230,11 @@ export default function CertificateForm() {
                 <span className="name"> Start Salary:</span> <br />
                 <input
                   type="text"
-                  value={stipend}
-                  onChange={(e) => setStipend(e.target.value)}
+                  value={start}
+                  onChange={(e) => setStart(e.target.value)}
                   className="allinput"
                   placeholder="Start Salary in k"
+                  required
                 />
               </div>
 
@@ -260,10 +242,11 @@ export default function CertificateForm() {
                 <span className="name"> End Salary:</span> <br />
                 <input
                   type="text"
-                  value={stipend}
-                  onChange={(e) => setStipend(e.target.value)}
+                  value={end}
+                  onChange={(e) => setEnd(e.target.value)}
                   className="allinput"
                   placeholder="End Salary in k"
+                  required
                 />
               </div>
             </div>
@@ -275,15 +258,6 @@ export default function CertificateForm() {
         </div>
       </form>
 
-      {/* Add some UI to display the generated form data if needed */}
-      {/* <div>
-        <h2>Generated Certificates:</h2>
-        <ul>
-          {Form.map((item, index) => (
-            <li key={index}>{item.name} - {item.role}</li>
-          ))}
-        </ul>
-      </div> */}
       <ToastContainer />
     </>
   );

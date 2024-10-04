@@ -62,9 +62,10 @@
 }
 
 .lettername {
-    /* font-size: 18px; */
+    font-size: 12px;
     /* margin: 20px 0; */
     text-transform: capitalize;
+    line-height: 12px;
 }
 
 .new-div {
@@ -239,4 +240,8 @@
     height: 50px;
     width: auto;
     /* border: 1px solid black; */
+}
+
+.text{
+    font-weight: 700;
 }

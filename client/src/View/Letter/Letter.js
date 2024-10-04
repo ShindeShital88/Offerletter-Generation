@@ -4,7 +4,7 @@ import "./Letter.css";
 import logo from "./logo.webp";
 import Navbar from "../../Component/Navbar/Navbar.js";
 import ReactToPrint from "react-to-print";
-import sign from "./sir sign.png"
+import sign from "./sir sign.png";
 
 export default function InternshipOffer() {
     // print
@@ -15,7 +15,9 @@ export default function InternshipOffer() {
     // Fetch form data from the server
     const getData = async () => {
         try {
-            const response = await axios.get('http://localhost:4000/api/formRoutes/allforms'); // Replace with the correct API URL
+            const response = await axios.get(
+                "http://localhost:4000/api/formRoutes/allforms"
+            ); // Replace with the correct API URL
             const userdata = response.data.data;
             console.log(userdata);
 
@@ -52,7 +54,6 @@ export default function InternshipOffer() {
         <>
             <Navbar />
             <div ref={printRef}>
-
                 <div className="offerletter">
                     <div className="arohi">
                         <img className="logo" src={logo} alt="Arohi Logo" />
@@ -70,7 +71,7 @@ export default function InternshipOffer() {
 
                     {last && ( // Check if last is not null before rendering the rest of the letter
                         <div className="new-div">
-                            <h6 className="lettername">Dear {last.name},</h6>
+                            <p className="lettername"><span className="text">Dear {last.name},</span></p>
                             <p className="size">
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I am
                                 pleased to extend an offer for an internship at Arohi Software
@@ -78,11 +79,20 @@ export default function InternshipOffer() {
                                 enthusiasm during the interview, and we believe that your skills
                                 and experience will be a valuable addition to our team.
                             </p>
-                            <h6 className="lettername">Position: {last.Position}</h6>
-                            <h6 className="lettername">Department: {last.role}</h6>
-                            <h6>Start Date: {formattedStartDate}</h6>
-                            <h6>End Date: {formattedEndDate}</h6>
-                            <h6>Stipend: {last.stipend}</h6>
+                            <p className="lettername"><span className="text">Position: </span>{last.Position}</p>
+                            <p className="lettername"><span className="text">Role: </span>{last.role}</p>
+                            <p className="lettername"><span className="text">Start Date: </span>{formattedStartDate}</p>
+                            <p className="lettername"><span className="text">End Date: </span>{formattedEndDate}</p>
+
+                            {last.range == "Range" ? (
+                                <p className="lettername">
+                                    <span className="text">Salary: </span>Between {last.start}k to {last.end}k per month (based
+                                    on performance and contribution to work)
+                                </p>
+                            ) : (
+                                <p className="lettername"><span className="text">Salary: </span>{last.start}k</p>
+                            )}
+
                             <p className="size">
                                 During your internship, you will have the opportunity to work on
                                 various projects and gain hands-on experience in your chosen
@@ -90,7 +100,8 @@ export default function InternshipOffer() {
                                 and support throughout your internship.
                             </p>
 
-                            <h6>Key Responsibilities:</h6>
+                            
+                            <p className="lettername"><span className="text">Key Responsibilities:</span></p>
                             <ul>
                                 <p className="size">
                                     {" "}
@@ -184,17 +195,17 @@ export default function InternshipOffer() {
                                 and look forward to a mutually beneficial partnership.
                             </p>
 
-                            <h6>Sincerely,</h6>
-                            <h6>Mr. Sanket Ghodake,</h6>
-                            <h6>Founder & CEO</h6>
-                            <img src={sign} alt="sign" className="sign"/>
+                            <p className="lettername"><span className="text">Sincerely,</span></p>
+                            <p className="lettername"><span className="text">Mr. Sanket Ghodake,</span></p>
+                            <p className="lettername"><span className="text">Founder & CEO</span></p>
+                            <img src={sign} alt="sign" className="sign" />
                         </div>
                     )}
                 </div>
                 {last && (
                     <div className="offerletter2">
                         <div className="new-div">
-                            <h6>Acceptance of Offer:</h6>
+                            <p className="lettername"><span className="text">Acceptance of Offer:</span></p>
                             <p className="size">
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please
                                 indicate your acceptance of this offer by signing and returning
@@ -207,19 +218,20 @@ export default function InternshipOffer() {
                                 forward to welcoming you to Arohi Software Development and are
                                 excited about the contributions you will bring to our team.
                             </p>
-                            <h6>Sincerely,</h6>
-                            <p>Mr. Sanket Ghodake,</p>
-                            <p>Founder & CEO</p>
-                            <p>Arohi Software Development</p>
+                            <p className="lettername"><span className="text">Sincerely,</span></p>
+                            <p className="lettername">Mr. Sanket Ghodake,</p>
+                            <p className="lettername">Founder & CEO</p>
+                            <p className="lettername">Arohi Software Development</p>
 
-                            <h6>Acceptance:</h6>
+                            
+                            <p className="lettername"><span className="text">Acceptance</span></p>
                             <p className="size">
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; I,{" "}
                                 {last.name}, accept the position of Intern at Arohi Software
                                 Development under the terms outlined above.
                             </p>
                             <p className="size">Signature:</p>
-                            <p>Date: {formattedDate}</p>
+                            <p className="size">Date: </p>
                         </div>
                     </div>
                 )}
