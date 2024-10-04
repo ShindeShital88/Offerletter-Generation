@@ -22,7 +22,7 @@ export default function CertificateForm() {
     event.preventDefault(); // Prevent page reload
 
     try {
-      await axios.post("http://localhost:4000/form", {
+      await axios.post('http://localhost:4000/api/formRoutes/form', {
         name: name,
         date_of_birth: date_of_birth,
         startdate: startdate,
