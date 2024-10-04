@@ -1,5 +1,5 @@
 .main-form{
-    height:90vh;
+    height:108vh;
     width:60vw;
     margin-left: 20vw;
     /* margin-top: 20px; */
@@ -17,8 +17,8 @@
   }
   
   .allinput{
-    height:6vh;
-    width: 300px;
+    height:8vh;
+    width: 20vw;
     /* border-radius: 10px; */
     text-align: center;
     font-size: large;
@@ -32,9 +32,9 @@
  
   .buton{
       height:8vh;
-      width:15vw;
+      width:20vw;
       border: 1px solid;
-      margin-left: 23vw;
+      margin-left: 19vw;
       margin-bottom: 25px;
       /* margin-top: 25px; */
       border-radius: 10px;
@@ -47,5 +47,5 @@
     text-align: center;
     font-weight:700;
     font-size:larger;
-
+    margin-top: -20px;
   }

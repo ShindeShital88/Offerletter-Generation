@@ -1,74 +1,211 @@
-.offerletter{
-    height: 350vh;
-    width: 65vw;
+/* General styles for the offer letter */
+.offerletter, .offerletter2 {
+    width: 90vw; /* Adjusted for responsiveness */
     border: 1px solid;
-    align-items: center;
-    margin: 20vh 15vw;
+    margin: 10vh auto;
+    padding: 20px;
+    box-sizing: border-box;
 }
-.arohi{
-    height: 30vh;
-    width: 60vw;
-    /* border: 2px solid; */
-    margin: 3vw 2vw;
+
+.arohi {
+    width: 100%;
     background-color: rgba(70, 135, 225, 0.936);
-}
-.logo{
-    height: 20vh;
-    width: 10vw;
-    margin-left: 25vw;
-}
-.mobileno-div{
-    height: 3vh;
-    width: 60vw;
-    /* border: 2px solid; */
-    margin: 3vw 2vw;
-    background-color: rgba(70, 135, 225, 0.936);
-display: flex;
-justify-content: space-around;
-}
-.mobileno{
-    
-  color: white;
- /* font-size: small; */
-    /* font: bold; */
-    /* margin-left: 10vw; */
-    padding-bottom:10px;
-}
-.head-part{
-    color:white;
-     text-align:center;
-      margin-top:-5px;
-}
-.head-part2{
-    color: white;
     text-align: center;
-    margin-top: -10px;
-}
-.lettername{
-    text-align: left;
-}
-.new-div{
-    height: 30vh;
-    width: 60vw;
-    /* border: 2px solid; */
-    margin: 3vw 2vw;
+    padding: 20px;
+    margin-bottom: 10px;
 }
 
+.logo {
+    height: 100px; /* Adjusted for smaller screens */
+    width: auto;
+    margin-bottom: 10px;
+}
 
-.offerletter2{
-    height: 120vh;
-    width: 65vw;
-    border: 1px solid;
+.mobileno-div {
+    display: flex;
+    flex-direction: column; /* Column layout for smaller screens */
+    justify-content: center;
     align-items: center;
-    margin: 10px 15vw;
+    background-color: rgba(70, 135, 225, 0.936);
+    padding: 10px;
+    color: white;
+    height: auto; /* Set height to auto for proper content display */
+    width: 100%; /* Ensure it takes the full width */
 }
-.print-button{
-    height:6vh;
-    width: 15vw;
-    border: 2px solid;
+
+.mobileno {
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    margin: 5px 0;
+    /* border: 2px solid; */
+}
+
+.head-part {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.head-part2 {
+    color: white;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.lettername {
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+.new-div {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.offerletter2 {
+    width: 90vw; /* Adjusted for responsiveness */
+    border: 1px solid;
+    padding: 20px;
+    margin: 20px auto;
+}
+
+.print-button {
+    height: 50px;
+    width: 150px;
+    border: none;
     background-color: rgb(92, 148, 212);
     border-radius: 10px;
     color: white;
-    font-size: large;
-    margin-left: 40vw;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+}
+
+/* Responsive Media Queries */
+@media (min-width: 768px) {
+    .offerletter, .offerletter2 {
+        width: 80vw;
+    }
+
+    .logo {
+        height: 100px; /* Adjusted for larger screens */
+    }
+
+    .mobileno-div {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+    .mobileno {
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .head-part {
+        font-size: 24px;
+    }
+
+    .head-part2 {
+        font-size: 16px;
+    }
+
+    .print-button {
+        height: 60px;
+        width: 160px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .offerletter, .offerletter2 {
+        width: 70vw;
+    }
+
+    .logo {
+        height: 120px; /* Further adjusted for large screens */
+    }
+
+    .head-part {
+        font-size: 28px;
+    }
+
+    .head-part2 {
+        font-size: 18px;
+    }
+
+    .mobileno-div {
+        justify-content: space-around;
+    }
+
+    .print-button {
+        height: 70px;
+        width: 180px;
+        font-size: 18px;
+    }
+}
+
+/* Print-specific styles */
+@media print {
+    body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-size: 12pt;
+    }
+
+    .offerletter, .offerletter2 {
+        width: 100%;
+        margin: 0;
+        border: none;
+        padding: 0;
+    }
+
+    .arohi {
+        width: 100%;
+        background-color: rgba(70, 135, 225, 0.936) !important;
+        padding: 10px;
+    }
+
+    .logo {
+        height: 80px;
+        width: auto;
+        margin-bottom: 10px;
+    }
+
+    .mobileno-div {
+        flex-direction: row !important; /* Force flex-direction to row */
+        justify-content: space-around; /* Space them out horizontally */
+        background-color: rgba(70, 135, 225, 0.936) !important;
+        color: white !important;
+        padding: 5px;
+        width: 100%;
+        /* height: 20px; */
+    }
+
+    .mobileno {
+        color: white !important;
+        font-size: 14px;
+        text-align: left;
+        margin: 0;
+    }
+
+    .print-button {
+        display: none; /* Hide the print button */
+    }
+
+    .offerletter2 {
+        page-break-before: always;
+    }
+
+    @page {
+        size: auto;
+        margin: 20mm;
+    }
+
+    body {
+        max-height: 297mm; /* Approx height of A4 page */
+        overflow: hidden;
+    }
 }

@@ -67,7 +67,7 @@ const[Position, setPosition] =useState('');
   return (
     <>
     <Navbar/>
-        <h2 style={{ textAlign: 'center', marginLeft:"20px",  marginTop: '20vh', fontSize:'50px' }}>Certificate Details</h2>
+        <h2 style={{ textAlign: 'center', marginLeft:"20px",  marginTop: '20vh', fontSize:'30px' }}>Certificate Details</h2>
 
       <form onSubmit={Generate}>  {/* Add onSubmit to the form */}
         <div className='main-form'>
@@ -175,14 +175,14 @@ const[Position, setPosition] =useState('');
       </form>
 
       {/* Add some UI to display the generated form data if needed */}
-      <div>
+      {/* <div>
         <h2>Generated Certificates:</h2>
         <ul>
           {Form.map((item, index) => (
             <li key={index}>{item.name} - {item.role}</li>
           ))}
         </ul>
-      </div>
+      </div> */}
       <ToastContainer/>
     </>
   );
