@@ -1,9 +1,11 @@
 /* General styles for the offer letter */
-.offerletter, .offerletter2 {
-    width: 90vw; /* Adjusted for responsiveness */
+.offerletter,
+.offerletter2 {
+    width: 90vw;
+    /* Adjusted for responsiveness */
     border: 1px solid;
-    margin: 10vh auto;
-    padding: 20px;
+    margin: 13vh auto;
+    padding: 30px;
     box-sizing: border-box;
 }
 
@@ -16,28 +18,33 @@
 }
 
 .logo {
-    height: 100px; /* Adjusted for smaller screens */
+    height: 100px;
+    /* Adjusted for smaller screens */
     width: auto;
     margin-bottom: 10px;
 }
 
 .mobileno-div {
     display: flex;
-    flex-direction: column; /* Column layout for smaller screens */
+    /* flex-direction: column; */
+    /* Column layout for smaller screens */
     justify-content: center;
     align-items: center;
     background-color: rgba(70, 135, 225, 0.936);
-    padding: 10px;
+    /* padding: 10px; */
     color: white;
-    height: auto; /* Set height to auto for proper content display */
-    width: 100%; /* Ensure it takes the full width */
+    /* height: auto; */
+    /* Set height to auto for proper content display */
+    width: 100%;
+    /* Ensure it takes the full width */
 }
 
 .mobileno {
     color: white;
-    font-size: 14px;
+    font-size: 12px;
+    line-height: 14px;
     text-align: center;
-    margin: 5px 0;
+    /* margin: 5px 0; */
     /* border: 2px solid; */
 }
 
@@ -50,13 +57,14 @@
 
 .head-part2 {
     color: white;
-    font-size: 14px;
+    /* font-size: 14px; */
     margin-top: 5px;
 }
 
 .lettername {
-    font-size: 18px;
-    margin: 20px 0;
+    /* font-size: 18px; */
+    /* margin: 20px 0; */
+    text-transform: capitalize;
 }
 
 .new-div {
@@ -65,7 +73,8 @@
 }
 
 .offerletter2 {
-    width: 90vw; /* Adjusted for responsiveness */
+    width: 90vw;
+    /* Adjusted for responsiveness */
     border: 1px solid;
     padding: 20px;
     margin: 20px auto;
@@ -86,12 +95,15 @@
 
 /* Responsive Media Queries */
 @media (min-width: 768px) {
-    .offerletter, .offerletter2 {
+
+    .offerletter,
+    .offerletter2 {
         width: 80vw;
     }
 
     .logo {
-        height: 100px; /* Adjusted for larger screens */
+        height: 100px;
+        /* Adjusted for larger screens */
     }
 
     .mobileno-div {
@@ -120,12 +132,15 @@
 }
 
 @media (min-width: 1024px) {
-    .offerletter, .offerletter2 {
+
+    .offerletter,
+    .offerletter2 {
         width: 70vw;
     }
 
     .logo {
-        height: 120px; /* Further adjusted for large screens */
+        height: 120px;
+        /* Further adjusted for large screens */
     }
 
     .head-part {
@@ -155,7 +170,8 @@
         font-size: 12pt;
     }
 
-    .offerletter, .offerletter2 {
+    .offerletter,
+    .offerletter2 {
         width: 100%;
         margin: 0;
         border: none;
@@ -175,8 +191,10 @@
     }
 
     .mobileno-div {
-        flex-direction: row !important; /* Force flex-direction to row */
-        justify-content: space-around; /* Space them out horizontally */
+        flex-direction: row !important;
+        /* Force flex-direction to row */
+        justify-content: space-around;
+        /* Space them out horizontally */
         background-color: rgba(70, 135, 225, 0.936) !important;
         color: white !important;
         padding: 5px;
@@ -192,7 +210,8 @@
     }
 
     .print-button {
-        display: none; /* Hide the print button */
+        display: none;
+        /* Hide the print button */
     }
 
     .offerletter2 {
@@ -205,7 +224,19 @@
     }
 
     body {
-        max-height: 297mm; /* Approx height of A4 page */
+        max-height: 297mm;
+        /* Approx height of A4 page */
         overflow: hidden;
     }
+}
+
+
+.size {
+    font-size: 13px !important;
+}
+
+.sign{
+    height: 50px;
+    width: auto;
+    /* border: 1px solid black; */
 }
