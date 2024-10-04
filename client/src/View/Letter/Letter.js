@@ -15,7 +15,7 @@ export default function InternshipOffer() {
     // Fetch form data from the server
     const getData = async () => {
         try {
-            const response = await axios.get('http://localhost:4000/form'); // Replace with the correct API URL
+            const response = await axios.get('http://localhost:4000/api/formRoutes/allforms'); // Replace with the correct API URL
             const userdata = response.data.data;
             console.log(userdata);
 
