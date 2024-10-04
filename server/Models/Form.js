@@ -25,9 +25,19 @@ const FormSchema = new Schema({
     type: String,
     required: true,
   },
-  stipend: {
+
+  range: {
+    type: String,
+    required: true,
+  },
+
+  start: {
     type: Number,  // Expecting a valid number here
     required: true,
+  },
+  end: {
+    type: Number,  // Expecting a valid number here
+    
   },
   acceptancedate: {
     type: String,  // Changed to String if you expect a statement like "I accept..."
