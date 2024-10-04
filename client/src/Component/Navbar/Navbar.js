@@ -1,37 +1,40 @@
-
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap';
 import './Navbar.css';
+import img from './logo.webp';
 
 function Navbar() {
-
   return (
     <>
-      <nav class="navbar barmain navbar-expand-lg navbar-light bg-light fixed-top ">
-        <div class="container-fluid">
-         {/* <img className='logomain' src={logomain} /> */}
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top barmain">
+        <div className="container-fluid">
+          <img className="nimg" src={img} alt="Logo" />
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
           </button>
           
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active space" aria-current="page" className='home' href="/">Form</a>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ms-auto fs-5 fw-bold ">
+              <li className="nav-item  ms-4">
+                <a className="nav-link space " href="/">Form</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link active space" aria-current="page" className='home' href="/InternshipOffer">Certificate</a>
+              <li className="nav-item ms-4">
+                <a className="nav-link space" href="/InternshipOffer">Certificate</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link active space" aria-current="page" className='home' href="/OfferletterData">OfferletterData</a>
+              <li className="nav-item ms-4">
+                <a className="nav-link space" href="/OfferletterData">OfferletterData</a>
               </li>
-            
-             
-              <li class="nav-item">
-                <a class="nav-link space" className='home' href="/Login">Login</a>
-
-
-             </li>
+              <li className="nav-item ms-4">
+                <a className="nav-link space" href="/Login">Login</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -39,4 +42,5 @@ function Navbar() {
     </>
   );
 }
+
 export default Navbar;
