@@ -45,33 +45,37 @@ export const FormData = async (req, res) => {
 };
 
 
- export const Updateofferletter = async (req, res) => {
+export const Updateofferletter = async (req, res) => {
 
-  const { id } = req.params;
 
-  const { name, date_of_birth, startdate, enddate, role, Position, stipend, acceptancedate } = req.body;
-  console.log(id)
+
+  const { _id, name, date_of_birth, startdate, enddate, role, Position, range,
+    start,
+    end, acceptancedate } = req.body;
+  console.log(_id)
   try {
-      const update = await Form.updateOne({ _id: id }, {
-          $set: {
-             name:name,
-             date_of_birth:date_of_birth,
-             startdate:startdate,
-             enddate:enddate,
-             role:role,
-             Position:Position,
-             stipend:stipend,
-             acceptancedate:acceptancedate
-          }
-      })
-      res.json({
-          sucess: true,
-          msg: "offerletter updated Succefully",
-          data: update
-      })
+    const update = await Form.updateOne({ _id: _id }, {
+      $set: {
+        name: name,
+        date_of_birth: date_of_birth,
+        startdate: startdate,
+        enddate: enddate,
+        role: role,
+        Position: Position,
+        range: range,
+        start: start,
+        end: end,
+        acceptancedate: acceptancedate
+      }
+    })
+    res.json({
+      sucess: true,
+      msg: "offerletter updated Succefully",
+      data: update
+    })
   }
   catch (e) {
-      console.log(e)
+    console.log(e)
   }
 }
 export const FormAllData = async (req, res) => {
