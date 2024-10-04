@@ -22,7 +22,7 @@ export default function OfferletterData() {
   const deleteAPI = async (Form) => {
         const id = Form._id;
         const deletedata = await axios.delete(`http://localhost:4000/form/${id}`)
-     alert("Are you sure you want to delete your name from the donation list?");
+     alert("Are you sure you delete this offerletter?");
         getdata(deletedata.data.msg);
         console.log("deletedata.data.msg");
     }
