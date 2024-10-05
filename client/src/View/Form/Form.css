@@ -1,51 +1,98 @@
-.main-form{
-    height:108vh;
-    width:60vw;
-    margin-left: 20vw;
-    /* margin-top: 20px; */
-    /* border: 1px solid; */
-    border-radius: 20px;
-    /* background-color: rgba(202, 200, 200, 0.233); */
-    box-shadow: 1px 1px 15px 1px rgb(201, 199, 199);
-    padding:20px;
-    margin-top:5vh;
-  }
-  .block{
-    display:flex;
-    justify-content: space-evenly;
-    margin:40px;
-  }
-  
-  .allinput{
-    height:8vh;
-    width: 20vw;
-    /* border-radius: 10px; */
-    text-align: center;
-    font-size: large;
-    margin-top:10px;
-    /* border: 1px solid; */
-    /* box-shadow: 1px 1px 10px 1px rgba(155, 154, 154, 0.852); */
-    border-radius: 10px;
+.main-form {
+  height: auto;
+  width: 60vw;
+  margin-left: 20vw;
+  border-radius: 20px;
+  box-shadow: 1px 1px 15px 1px rgb(201, 199, 199);
+  padding: 20px;
+  margin-top: 5vh;
+}
+
+/* Flex layout for blocks */
+.block {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px;
+  gap: 20px; /* Add gap between form fields */
+}
+
+/* Styling for inputs */
+.allinput {
+  height: 8vh;
+  width: 20vw;
+  text-align: center;
+  font-size: large;
+  margin-top: 10px;
+  border-radius: 10px;
   transition: 2s;
-  
-  }
- 
-  .buton{
-      height:8vh;
-      width:20vw;
-      border: 1px solid;
-      margin-left: 19vw;
-      margin-bottom: 25px;
-      /* margin-top: 25px; */
-      border-radius: 10px;
-      font-weight:700;
-      font-size: larger;
-      background-color: rgb(92, 148, 212)
+}
+
+/* Button styling */
+.buton {
+  height: 8vh;
+  width: 20vw;
+  border: 1px solid;
+  margin-left: 19vw;
+  margin-bottom: 25px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: larger;
+  background-color: rgb(92, 148, 212);
+}
+
+/* Label styling */
+.name {
+  text-align: center;
+  font-weight: 700;
+  font-size: larger;
+  margin-top: -20px;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 1024px) {
+  .main-form {
+    width: 80vw;
+    margin-left: 10vw;
   }
 
-  .name{
-    text-align: center;
-    font-weight:700;
-    font-size:larger;
-    margin-top: -20px;
+  .allinput {
+    width: 40vw;
   }
+
+  .buton {
+    width: 40vw;
+    margin-left: calc(20vw - 10px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main-form {
+    width: 90vw;
+    /* margin-left: 5vw; */
+  }
+
+  .block {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .allinput {
+    width: 80vw;
+  }
+
+  .buton {
+    width: 80vw;
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .allinput {
+    width: 80vw;
+  }
+
+  .buton {
+    width: 80vw;
+    margin-left: 0;
+  }
+}
