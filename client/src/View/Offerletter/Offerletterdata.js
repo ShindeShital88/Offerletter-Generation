@@ -5,19 +5,30 @@ import './Offerletter.css';  // Assuming you've created a custom CSS file
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from "../../Component/Navbar/Navbar.js";
+import { useParams } from "react-router-dom";
 
 export default function OfferletterData() {
     const [Form, setForm] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedForm, setSelectedForm] = useState(null);
 
+
+    const [searchname , setSearchName] = useState('');
+    const [searchrole, setSearchRole] = useState('');
+
     const getdata = async () => {
+        console.log(searchname,searchrole);
         try {
-            const alldata = await axios.get('http://localhost:4000/api/formRoutes/allforms');
-            console.log(alldata.data.data);
+            const alldata = await axios.get('http://localhost:4000/api/formRoutes/allforms',{
+          params:{
+            name:searchname,
+            role:searchrole,
+          },
+        });
+            console.log( "Alldata:", alldata.data.data);
             setForm(alldata.data.data);
-        } catch (e) {
-            console.error("Failed to fetch data", e);
+        } catch (err) {
+            toast.error("Failed to fetch data");
         }
     };
 
@@ -54,9 +65,24 @@ export default function OfferletterData() {
         setIsModalOpen(true);
     };
 
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        getdata();
+      };
+
+
+
     return (
         <>
             <Navbar />
+            <form onSubmit={handleSearch}>
+          <div>
+            <input type="text" placeholder="add name" value={searchname} onChange={(e)=>setSearchName(e.target.value)} />
+          <input type="text" placeholder="add role" value={searchrole} onChange={(e)=>setSearchRole(e.target.value)}/>
+          </div>
+<div>{""}<button type="submit">search</button></div>
+                
             <table className="custom-table">
                 <thead>
                     <tr>
@@ -66,7 +92,7 @@ export default function OfferletterData() {
                         <th>End Date</th>
                         <th>Role</th>
                         <th>Position</th>
-                        <th>Stipend</th>
+                        {/* <th>Stipend</th> */}
                         <th>Range</th>
                         <th>Start</th>
                         <th>End</th>
@@ -83,24 +109,25 @@ export default function OfferletterData() {
                             <td>{formatDate(Data.enddate)}</td>
                             <td>{Data.role}</td>
                             <td>{Data.Position}</td>
-                            <td>{Data.stipend}</td>
+                            {/* <td>{Data.stipend}</td> */}
                             <td>{Data.range}</td>
                             <td>{Data.start}</td>
                             <td>{Data.end}</td>
                             <td>{formatDate(Data.acceptancedate)}</td>
-                            <td>
+                            <div className="">  <td>
                                 <button className='action-btn' onClick={() => openModal(Data)}>Update</button>
                                 <button className='action-btn' onClick={() => { deleteAPI(Data) }}>Delete</button>
-                            </td>
+                            </td></div>
+                          
                         </tr>
                     ))}
                 </tbody>
             </table>
-
+           </form>
             {isModalOpen && (
   <div className="modal-overlay">
-    <div className="modal-content" style={{ maxHeight: "90vh", maxWidth:"40vw", overflowY: "auto" }}>
-      <h2>Update Offer Letter</h2>
+    <div className="modal-content" style={{ maxHeight: "90vh", marginTop:"20vh", overflowY: "auto" }}>
+      {/* <h2>Update Offer Letter</h2> */}
 
       <div className="form-group">
         <label>Full Name</label>
@@ -132,34 +159,37 @@ export default function OfferletterData() {
         />
       </div>
 
-      <div className="form-group">
-        <label>Start Date</label>
-        <input
-          type="date"
-          value={selectedForm.startdate}
-          onChange={(e) =>
-            setSelectedForm({
-              ...selectedForm,
-              startdate: e.target.value,
-            })
-          }
-          className="input-field"
-        />
-      </div>
+      {/* Start Date and End Date side by side */}
+      <div className="date-group" style={{ display: "flex", gap: "20px" }}>
+        <div className="form-group" style={{ flex: 1 }}>
+          <label>Start Date</label>
+          <input
+            type="date"
+            value={selectedForm.startdate}
+            onChange={(e) =>
+              setSelectedForm({
+                ...selectedForm,
+                startdate: e.target.value,
+              })
+            }
+            className="input-field"
+          />
+        </div>
 
-      <div className="form-group">
-        <label>End Date</label>
-        <input
-          type="date"
-          value={selectedForm.enddate}
-          onChange={(e) =>
-            setSelectedForm({
-              ...selectedForm,
-              enddate: e.target.value,
-            })
-          }
-          className="input-field"
-        />
+        <div className="form-group" style={{ flex: 1 }}>
+          <label>End Date</label>
+          <input
+            type="date"
+            value={selectedForm.enddate}
+            onChange={(e) =>
+              setSelectedForm({
+                ...selectedForm,
+                enddate: e.target.value,
+              })
+            }
+            className="input-field"
+          />
+        </div>
       </div>
 
       <div className="form-group">

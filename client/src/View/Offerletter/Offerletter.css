@@ -2,7 +2,7 @@
 .custom-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 100px 10px;
+    margin: 200px 10px;
 }
 
 .custom-table th, .custom-table td {

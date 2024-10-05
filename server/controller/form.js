@@ -29,14 +29,13 @@ export const FormData = async (req, res) => {
       acceptancedate,
     });
 
-    // Respond with success and the created document
     res.json({
       success: true,
       data: newForm,
       msg: "Data added successfully",
     });
   } catch (error) {
-    // Handle any errors during the database operation
+ 
     res.status(500).json({
       success: false,
       msg: error.message,
@@ -45,11 +44,11 @@ export const FormData = async (req, res) => {
 };
 
 
+
+
+
 export const Updateofferletter = async (req, res) => {
-
-
-
-  const { _id, name, date_of_birth, startdate, enddate, role, Position, range,
+const { _id, name, date_of_birth, startdate, enddate, role, Position, range,
     start,
     end, acceptancedate } = req.body;
   console.log(_id)
@@ -80,17 +79,17 @@ export const Updateofferletter = async (req, res) => {
 }
 export const FormAllData = async (req, res) => {
   try {
-    // Fetch all the documents from the 'Form' collection
+ 
     const forms = await Form.find();
 
-    // Respond with the fetched data
+  
     res.json({
       success: true,
       data: forms,
       msg: "Data fetched successfully",
     });
   } catch (error) {
-    // Handle any errors during the database operation
+   
     res.status(500).json({
       success: false,
       msg: error.message,
@@ -106,3 +105,51 @@ export const DeleteData = async (req, res) => {
     msg: "id is deleted",
   });
 };
+
+
+
+export const Searchofferletter = async (req, res) => {
+  const { name, role } = req.query; // Use req.query to handle search params
+
+  // Initialize an empty search condition
+  let searchCondition = {};
+
+  // Add name filter if 'name' exists in query
+  if (name) {
+    searchCondition.name = { $regex: new RegExp(name, 'i') }; // Case-insensitive regex search
+  }
+
+  // Add role filter if 'role' exists in query
+  if (role) {
+    searchCondition.role = { $regex: new RegExp(role, 'i') }; // Case-insensitive regex search
+  }
+
+  try {
+    // Fetch offer letters based on search conditions
+    const offerletters = await Form.find(searchCondition);
+
+    // If no matching records found, return a meaningful message
+    if (offerletters.length === 0) {
+      return res.status(404).json({
+        success: true,
+        message: "No records found with the provided search criteria",
+      });
+    }
+
+    // Return filtered results
+    res.status(200).json({
+      success: true,
+      data: offerletters,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
+
+
+
+
