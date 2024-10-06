@@ -1,26 +1,26 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import './Offerletter.css';  // Assuming you've created a custom CSS file
 
+import { useEffect, useState } from "react";
+import './Offerletter.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from "../../Component/Navbar/Navbar.js";
-
 import edit from './edit.png';
 import deleteicon from './delete.png';
 import view from './view.png';
 import logo from './logo.webp';
 import sign from './sir sign.png';
+
 export default function OfferletterData() {
     const [Form, setForm] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedForm, setSelectedForm] = useState(null);
     const [viewedForm, setViewedForm] = useState(null); // New state for view
-    const [last, setLast] = useState(null);
+    const [last, setLast] = useState(null); // Used for Acceptance of Offer display
+
     const getdata = async () => {
         try {
             const alldata = await axios.get('http://localhost:4000/api/formRoutes/allforms');
-            console.log(alldata.data.data);
             setForm(alldata.data.data);
         } catch (e) {
             console.error("Failed to fetch data", e);
@@ -29,9 +29,10 @@ export default function OfferletterData() {
 
     const deleteAPI = async (Form) => {
         const id = Form._id;
-        await axios.delete(`http://localhost:4000/api/formRoutes/form/${id}`);
-        alert("Are you sure you want to delete this offer letter?");
-        getdata();  // Refresh data after deletion
+        if (window.confirm("Are you sure you want to delete this offer letter?")) {
+            await axios.delete(`http://localhost:4000/api/formRoutes/form/${id}`);
+            getdata();  // Refresh data after deletion
+        }
     };
 
     const handleUpdate = async () => {
@@ -45,17 +46,6 @@ export default function OfferletterData() {
             toast.error("Error updating offer letter");
         }
     };
-
-    const formattedStartDate = last
-    ? new Date(last.startdate).toLocaleDateString("en-GB")
-    : "";
-const formattedEndDate = last
-    ? new Date(last.enddate).toLocaleDateString("en-GB")
-    : "";
-const formattedDate = last
-    ? new Date(last.acceptancedate).toLocaleDateString("en-GB")
-    : "";
-
 
     useEffect(() => {
         getdata();
@@ -72,8 +62,12 @@ const formattedDate = last
     };
 
     const openView = (offerletterData) => {
-        setViewedForm(offerletterData); // Set the form to view
+        setViewedForm(offerletterData);
+        setLast(offerletterData); // Set the selected form as last to display acceptance
+        toast.success("offerletter show successfully ")
     };
+
+    const formattedDate = last ? formatDate(last.acceptancedate) : '';
 
     return (
         <>
@@ -110,10 +104,10 @@ const formattedDate = last
                             <td>{Data.end}</td>
                             <td>{formatDate(Data.acceptancedate)}</td>
                             <td>
-                                <button className='action-btn' >
-                                    <img className="edit-icon" onClick={() => openView(Data)} src={view} />
-                                    <img className="edit-icon" onClick={() => openModal(Data)} src={edit} />
-                                    <img className="edit-icon" onClick={() => { deleteAPI(Data) }} src={deleteicon} />
+                                <button className='action-btn'>
+                                    <img className="edit-icon" onClick={() => openView(Data)} src={view} alt="View" />
+                                    <img className="edit-icon" onClick={() => openModal(Data)} src={edit} alt="Edit" />
+                                    <img className="edit-icon" onClick={() => { deleteAPI(Data) }} src={deleteicon} alt="Delete" />
                                 </button>
                             </td>
                         </tr>
@@ -123,21 +117,21 @@ const formattedDate = last
 
             {/* Display the viewed form details here */}
             {viewedForm && (
-    <div className="offerletter">
-        <div className="arohi">
-            <img className="logo" src={logo} alt="Arohi Logo" />
-            <h5 className="head-part">AROHI SOFTWARE DEVELOPMENT</h5>
-            <h6 className="head-part2">
-                Arohi Softwares, Sai Hospital building, in front of Bhairavnath
-                Chowk, Shrigonda, Tal-Shrigonda, Dist- Ahmednagar, 413701
-            </h6>
-        </div>
-        <p className="mobileno-div">
-            <span className="mobileno">+91 7517861332</span>
-            <span className="mobileno">arohisoftwares98@gmail.com</span>
-        </p>
+                <div className="offerletter">
+                    <div className="arohi">
+                        <img className="logo" src={logo} alt="Arohi Logo" />
+                        <h5 className="head-part">AROHI SOFTWARE DEVELOPMENT</h5>
+                        <h6 className="head-part2">
+                            Arohi Softwares, Sai Hospital building, in front of Bhairavnath
+                            Chowk, Shrigonda, Tal-Shrigonda, Dist- Ahmednagar, 413701
+                        </h6>
+                    </div>
+                    <p className="mobileno-div">
+                        <span className="mobileno">+91 7517861332</span>
+                        <span className="mobileno">arohisoftwares98@gmail.com</span>
+                    </p>
 
-        <div className="new-div">
+                    <div className="new-div">
             <p className="lettername"><span className="text">Dear {viewedForm.name},</span></p>
             <p className="size">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I am
@@ -265,45 +259,50 @@ const formattedDate = last
                             <img src={sign} alt="sign" className="sign" />
           
         </div>
-        {last && (
-                    <div className="offerletter2">
-                        <div className="new-div">
-                            <p className="lettername"><span className="text">Acceptance of Offer:</span></p>
-                            <p className="size">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please
-                                indicate your acceptance of this offer by signing and returning
-                                a copy of this letter by {formattedDate}. If you have any
-                                questions or require further information, please do not hesitate
-                                to contact us.
-                            </p>
-                            <p className="size">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We look
-                                forward to welcoming you to Arohi Software Development and are
-                                excited about the contributions you will bring to our team.
-                            </p>
-                            <p className="lettername"><span className="text">Sincerely,</span></p>
-                            <p className="lettername">Mr. Sanket Ghodake,</p>
-                            <p className="lettername">Founder & CEO</p>
-                            <p className="lettername">Arohi Software Development</p>
+                </div>
+            )}
 
-                            
-                            <p className="lettername"><span className="text">Acceptance</span></p>
-                            <p className="size">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; I,{" "}
-                                {last.name}, accept the position of Intern at Arohi Software
-                                Development under the terms outlined above.
-                            </p>
-                            <p className="size">Signature:</p>
-                            <p className="size">Date: </p>
-                        </div>
+
+
+            {/* Acceptance of Offer Section */}
+            {last && (
+                <div className="offerletter2">
+                    <div className="new-div">
+                        <p className="lettername"><span className="text">Acceptance of Offer:</span></p>
+                        <p className="size">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please
+                            indicate your acceptance of this offer by signing and returning
+                            a copy of this letter by {formattedDate}. If you have any
+                            questions or require further information, please do not hesitate
+                            to contact us.
+                        </p>
+                        <p className="size">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We look
+                            forward to welcoming you to Arohi Software Development and are
+                            excited about the contributions you will bring to our team.
+                        </p>
+                        <p className="lettername"><span className="text">Sincerely,</span></p>
+                        <p className="lettername">Mr. Sanket Ghodake,</p>
+                        <p className="lettername">Founder & CEO</p>
+                        <p className="lettername">Arohi Software Development</p>
+
+                        <p className="lettername"><span className="text">Acceptance</span></p>
+                        <p className="size">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; I,{" "}
+                            {last.name}, accept the position of Intern at Arohi Software
+                            Development under the terms outlined above.
+                        </p>
+                        <p className="size">Signature:</p>
+                        <p className="size">Date: </p>
                     </div>
-                )}
-    </div>
-)}
+                </div>
+            )}
+            
 
-            {isModalOpen && (
+            {/* Update Modal */}
+        {isModalOpen && (
                 <div className="modal-overlay">
-                    <div className="modal-content" style={{ maxHeight: "90vh", maxWidth: "40vw", overflowY: "auto" }}>
+                    <div className="modal-content" style={{ maxHeight: "90vh", maxWidth: "40vw", marginTop:"40px", overflowY: "auto" }}>
                         <h2>Update Offer Letter</h2>
 
                         <div className="form-group">
