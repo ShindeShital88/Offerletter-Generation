@@ -1,8 +1,8 @@
 /* Styling for table */
 .custom-table {
-    width: 100%;
+    width: 96%;
     border-collapse: collapse;
-    margin: 90px 10px;
+    margin: 110px auto;
     text-align: center;
 }
 

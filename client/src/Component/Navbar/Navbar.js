@@ -3,7 +3,7 @@ import 'bootstrap/dist/js/bootstrap';
 import './Navbar.css';
 import img from './logo.webp';
 
-function Navbar() {
+function Navbar() { 
 
   const Logout =()=>{
     localStorage.removeItem('customer');
@@ -30,7 +30,7 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto fs-5 fw-bold ">
               <li className="nav-item  ms-4">
-                <a className="nav-link space " href="/">Form</a>
+                <a className="nav-link space " href="/form">Form</a>
               </li>
               <li className="nav-item ms-4">
                 <a className="nav-link space" href="/InternshipOffer">Certificate</a>

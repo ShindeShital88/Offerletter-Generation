@@ -301,10 +301,10 @@ const Data = [
 
 
 export default function InternshipOffer() {
-    // print
+    
     const printRef = useRef();
-    const [formData, setFormData] = useState([]); // State to store fetched form data
-    const [last, setLast] = useState(null); // Initialize with null instead of undefined
+    const [formData, setFormData] = useState([]); 
+    const [last, setLast] = useState(null); 
     const [respo, setRespo] = useState([]);
 
     // Fetch form data from the server
@@ -357,12 +357,6 @@ export default function InternshipOffer() {
     }
     console.log("respo", respo)
 
-    // console.log("date1", respo.one);
-    // console.log("date2", respo.two);
-    // console.log("date3", respo.three);
-    // console.log("date4", respo.four);
-    // console.log("date5", respo.five);
-    // console.log("date6", respo.six);
 
     const one = respo.one
     const two = respo.two
@@ -381,12 +375,7 @@ export default function InternshipOffer() {
         write();
     }, [last]);
 
-    // // Function to handle print action
-    // const handlePrint = () => {
-    //     window.print(); // Trigger the print dialog
-    // };
-
-    // Ensure last is not null before accessing its properties
+   
     const formattedStartDate = last
         ? new Date(last.startdate).toLocaleDateString("en-GB")
         : "";
@@ -398,41 +387,7 @@ export default function InternshipOffer() {
         : "";
 
 
-    // console.log(Data.roles.responsibility)
-
-
-
-    // console.log("data", Data)
-
-
-    // console.log("data", Data)
-
-    // const a = last.role;
-
-    // console.log(a);
-    // const roleData = async () => {
-    //     console.log("ds", Data)
-    //     const date = await Data.find(r => r.role === a);
-    //     console.log("date", date);
-
-    //     // Ensure responsibility is set correctly
-    //     setRespo(date ? date.responsibility : []); // Set an empty array if date or responsibility is undefined
-    // }
-
-
-    // console.log("respo", respo);
-
-    // useEffect(() => {
-    //     roleData();
-    // }, [last.role])
-
-
-
-    // useEffect(() => {
-    //     roleData();
-
-    // }, [last.role, Data.roles]); // Add dependencies if necessary, e.g., [last.role, Data.roles]
-
+    
 
 
 
