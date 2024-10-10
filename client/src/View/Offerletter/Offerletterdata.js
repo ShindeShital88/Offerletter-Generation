@@ -1,6 +1,6 @@
 import axios from "axios";
+import React, { useState, useRef, useEffect } from "react";
 
-import { useEffect, useState } from "react";
 import './Offerletter.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,14 +10,17 @@ import deleteicon from './delete.png';
 import view from './view.png';
 import logo from './logo.webp';
 import sign from './sir sign.png';
+import ReactToPrint from "react-to-print";
 
 export default function OfferletterData() {
+    const printRef = useRef();
     const [Form, setForm] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedForm, setSelectedForm] = useState(null);
-    const [viewedForm, setViewedForm] = useState(null); // New state for view
-    const [last, setLast] = useState(null); // Used for Acceptance of Offer display
-
+    const [viewedForm, setViewedForm] = useState(null); // For viewing the offer letter in popup
+    const [isViewModalOpen, setIsViewModalOpen] = useState(false); // To manage view modal state
+    const [last, setLast] = useState(null); 
+    
     const getdata = async () => {
         try {
             const alldata = await axios.get('http://localhost:4000/api/formRoutes/allforms');
@@ -63,12 +66,11 @@ export default function OfferletterData() {
 
     const openView = (offerletterData) => {
         setViewedForm(offerletterData);
-        setLast(offerletterData); // Set the selected form as last to display acceptance
-        toast.success("offerletter show successfully ")
+        setIsViewModalOpen(true); // Open view modal when an offer letter is clicked
+        toast.success("Offer letter opened in the modal.");
     };
 
     const formattedDate = last ? formatDate(last.acceptancedate) : '';
-
     return (
         <>
             <Navbar />
@@ -81,10 +83,7 @@ export default function OfferletterData() {
                         <th>End Date</th>
                         <th>Role</th>
                         <th>Position</th>
-                        <th>Stipend</th>
-                        <th>Range</th>
-                        <th>Start</th>
-                        <th>End</th>
+                        <th>Salary</th>
                         <th>Acceptance Date</th>
                         <th colSpan={2}>Actions</th>
                     </tr>
@@ -98,10 +97,16 @@ export default function OfferletterData() {
                             <td>{formatDate(Data.enddate)}</td>
                             <td>{Data.role}</td>
                             <td>{Data.Position}</td>
-                            <td>{Data.stipend}</td>
-                            <td>{Data.range}</td>
-                            <td>{Data.start}</td>
-                            <td>{Data.end}</td>
+                            {/* Conditionally render either fixed salary or salary range */}
+                            <td>
+                                {Data.fixedSalary !== undefined && Data.fixedSalary !== null && Data.fixedSalary !== '' ? (
+                                    Data.fixedSalary
+                                ) : Data.start ? (
+                                    Data.end ? `${Data.start}k - ${Data.end}k` : `${Data.start}k`
+                                ) : (
+                                    ''
+                                )}
+                            </td>
                             <td>{formatDate(Data.acceptancedate)}</td>
                             <td>
                                 <button className='action-btn'>
@@ -115,157 +120,157 @@ export default function OfferletterData() {
                 </tbody>
             </table>
 
-            {/* Display the viewed form details here */}
-            {viewedForm && (
-                <div className="offerletter">
-                    <div className="arohi">
-                        <img className="logo" src={logo} alt="Arohi Logo" />
-                        <h5 className="head-part">AROHI SOFTWARE DEVELOPMENT</h5>
-                        <h6 className="head-part2">
-                            Arohi Softwares, Sai Hospital building, in front of Bhairavnath
-                            Chowk, Shrigonda, Tal-Shrigonda, Dist- Ahmednagar, 413701
-                        </h6>
+            {/* Modal for viewing offer letter details */}
+            {isViewModalOpen && viewedForm && (
+                <div className="modal-overlay">
+                    <div className="modal-content" >
+                        <h2>Offer Letter Details</h2>
+                        <div className="arohi">
+                            <img className="logo" src={logo} alt="Arohi Logo" />
+                            <h5 className="head-part">AROHI SOFTWARE DEVELOPMENT</h5>
+                            <h6 className="head-part2">
+                                Arohi Softwares, Sai Hospital building, in front of Bhairavnath
+                                Chowk, Shrigonda, Tal-Shrigonda, Dist- Ahmednagar, 413701
+                            </h6>
+                        </div>
+                        <p className="mobileno-div">
+                            <span className="mobileno">+91 7517861332</span>
+                            <span className="mobileno">arohisoftwares98@gmail.com</span>
+                        </p>
+                        <div className="new-div">
+                            <p className="lettername"><span className="text">Dear {viewedForm.name},</span></p>
+                            <p className="size">
+                                I am pleased to extend an offer for an internship at Arohi Software Development. We were impressed with your qualifications and enthusiasm during the interview, and we believe that your skills and experience will be a valuable addition to our team.
+                            </p>
+                            <p className="lettername"><span className="text">Position: </span>{viewedForm.Position}</p>
+                            <p className="lettername"><span className="text">Role: </span>{viewedForm.role}</p>
+                            <p className="lettername"><span className="text">Start Date: </span>{formatDate(viewedForm.startdate)}</p>
+                            <p className="lettername"><span className="text">End Date: </span>{formatDate(viewedForm.enddate)}</p>
+
+                            {/* Salary details */}
+                            {viewedForm.range === "Range" ? (
+                                <p className="lettername"><span className="text">Salary: </span>Between {viewedForm.start}k to {viewedForm.end}k per month (based on performance and contribution to work)</p>
+                            ) : (
+                                <p className="lettername"><span className="text">Salary: </span>{viewedForm.start}k</p>
+                            )}
+                        </div>
+
+                        <p className="size">
+                            During your internship, you will have the opportunity to work on
+                            various projects and gain hands-on experience in your chosen
+                            field. You will be reporting to me, and I will provide guidance
+                            and support throughout your internship.
+                        </p>
+                        <p className="lettername"><span className="text">Key Responsibilities:</span></p>
+                        <ul>
+                            <p className="size">
+                                {" "}
+                                1. Web Development: Developing and maintaining web
+                                applications, websites, and systems using a combination of
+                                front-end (HTML, CSS, JavaScript) and back-end (e.g., Node.js,
+                                Python, Ruby on Rails) technologies.
+                            </p>
+                            <p className="size">
+                                {" "}
+                                2. Database Management: Designing, implementing, and managing
+                                databases, including creating and optimizing database schemas
+                                and writing SQL queries.
+                            </p>
+                            <p className="size">
+                                {" "}
+                                3. User Interface (UI) Design: Creating and improving user
+                                interfaces to ensure a seamless and user-friendly experience.
+                            </p>
+                            <p className="size">
+                                {" "}
+                                4. Server Management: Deploying and managing web servers,
+                                ensuring their performance, security, and scalability.
+                            </p>
+                            <p className="size">
+                                5. Programming and Coding: Writing clean, efficient, and
+                                maintainable code, as well as debugging and troubleshooting
+                                issues.
+                            </p>
+                            <p className="size">
+                                6. Version Control: Using version control systems (e.g., Git)
+                                to manage code repositories and collaborate with team members.
+                            </p>
+                            <p className="size">
+                                7. API Integration: Integrating external APIs into web
+                                applications for functionality and data exchange.
+                            </p>
+                            <p className="size">
+                                8. Testing and Quality Assurance: Performing testing and
+                                quality assurance to identify and fix bugs and ensure the
+                                reliability of the software.
+                            </p>
+                            <p className="size">
+                                9. Cross-Platform Compatibility: Ensuring that web
+                                applications and websites are compatible with various
+                                browsers, devices, and screen sizes.
+                            </p>
+                            <p className="size">
+                                10. Security: Implementing security best practices to protect
+                                against common web vulnerabilities, such as SQL injection and
+                                cross-site scripting (XSS).
+                            </p>
+                            <p className="size">
+                                11. Code Documentation: Creating and maintaining documentation
+                                for code, APIs, and system architecture.
+                            </p>
+                            <p className="size">
+                                12. Collaboration: Working closely with front-end developers,
+                                back-end developers, and other team members to develop, test,
+                                and deploy web applications.
+                            </p>
+                            <p className="size">
+                                13. Problem Solving: Identifying and resolving technical
+                                issues and challenges in a dynamic development environment.
+                            </p>
+                            <p className="size">
+                                14. Staying Informed: Keeping up to date with the latest
+                                technologies and best practices in web development.
+                            </p>
+                            <p className="size">
+                                15. Continuous Learning: Taking advantage of the internship as
+                                a learning opportunity, seeking guidance from mentors, and
+                                expanding your technical skills.
+                            </p>
+                        </ul>
+                        <p className="size">
+                            We are excited about the prospect of having you join our team
+                            and look forward to a mutually beneficial partnership.
+                        </p>
+                        <p className="size">
+                            Please review the offer letter and, if you accept, respond via WhatsApp.
+                        </p>
+
+                        <p className="size">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We expect
+                            you to maintain a high standard of professionalism and adhere to
+                            our company's policies and procedures throughout your
+                            internship. This is a paid internship position.
+                        </p>
+
+                        <p className="size">
+                            Please review this offer letter carefully and, if you accept our
+                            offer, share your response on WhatsApp.
+                        </p>
+
+                        <p className="size">
+                            We are excited about the prospect of having you join our team
+                            and look forward to a mutually beneficial partnership.
+                        </p>
+
+                        <p className="lettername"><span className="text">Sincerely,</span></p>
+                        <p className="lettername"><span className="text">Mr. Sanket Ghodake,</span></p>
+                        <p className="lettername"><span className="text">Founder & CEO</span></p>
+                        <img src={sign} alt="sign" className="sirsign" />
+                        
                     </div>
-                    <p className="mobileno-div">
-                        <span className="mobileno">+91 7517861332</span>
-                        <span className="mobileno">arohisoftwares98@gmail.com</span>
-                    </p>
 
-                    <div className="new-div">
-            <p className="lettername"><span className="text">Dear {viewedForm.name},</span></p>
-            <p className="size">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I am
-                                pleased to extend an offer for an internship at Arohi Software
-                                Development. We were impressed with your qualifications and
-                                enthusiasm during the interview, and we believe that your skills
-                                and experience will be a valuable addition to our team.
-            </p>
-            <p className="lettername"><span className="text">Position: </span>{viewedForm.Position}</p>
-            <p className="lettername"><span className="text">Role: </span>{viewedForm.role}</p>
-            <p className="lettername"><span className="text">Start Date: </span>{formatDate(viewedForm.startdate)}</p>
-            <p className="lettername"><span className="text">End Date: </span>{formatDate(viewedForm.enddate)}</p>
-            
-            {viewedForm.range === "Range" ? (
-                <p className="lettername">
-                    <span className="text">Salary: </span>Between {viewedForm.start}k to {viewedForm.end}k per month (based on performance and contribution to work)
-                </p>
-            ) : (
-                <p className="lettername"><span className="text">Salary: </span>{viewedForm.start}k</p>
-            )}
-
-<p className="size">
-                                During your internship, you will have the opportunity to work on
-                                various projects and gain hands-on experience in your chosen
-                                field. You will be reporting to me, and I will provide guidance
-                                and support throughout your internship.
-                            </p>
-                            <p className="lettername"><span className="text">Key Responsibilities:</span></p>
-                            <ul>
-                                <p className="size">
-                                    {" "}
-                                    1. Web Development: Developing and maintaining web
-                                    applications, websites, and systems using a combination of
-                                    front-end (HTML, CSS, JavaScript) and back-end (e.g., Node.js,
-                                    Python, Ruby on Rails) technologies.
-                                </p>
-                                <p className="size">
-                                    {" "}
-                                    2. Database Management: Designing, implementing, and managing
-                                    databases, including creating and optimizing database schemas
-                                    and writing SQL queries.
-                                </p>
-                                <p className="size">
-                                    {" "}
-                                    3. User Interface (UI) Design: Creating and improving user
-                                    interfaces to ensure a seamless and user-friendly experience.
-                                </p>
-                                <p className="size">
-                                    {" "}
-                                    4. Server Management: Deploying and managing web servers,
-                                    ensuring their performance, security, and scalability.
-                                </p>
-                                <p className="size">
-                                    5. Programming and Coding: Writing clean, efficient, and
-                                    maintainable code, as well as debugging and troubleshooting
-                                    issues.
-                                </p>
-                                <p className="size">
-                                    6. Version Control: Using version control systems (e.g., Git)
-                                    to manage code repositories and collaborate with team members.
-                                </p>
-                                <p className="size">
-                                    7. API Integration: Integrating external APIs into web
-                                    applications for functionality and data exchange.
-                                </p>
-                                <p className="size">
-                                    8. Testing and Quality Assurance: Performing testing and
-                                    quality assurance to identify and fix bugs and ensure the
-                                    reliability of the software.
-                                </p>
-                                <p className="size">
-                                    9. Cross-Platform Compatibility: Ensuring that web
-                                    applications and websites are compatible with various
-                                    browsers, devices, and screen sizes.
-                                </p>
-                                <p className="size">
-                                    10. Security: Implementing security best practices to protect
-                                    against common web vulnerabilities, such as SQL injection and
-                                    cross-site scripting (XSS).
-                                </p>
-                                <p className="size">
-                                    11. Code Documentation: Creating and maintaining documentation
-                                    for code, APIs, and system architecture.
-                                </p>
-                                <p className="size">
-                                    12. Collaboration: Working closely with front-end developers,
-                                    back-end developers, and other team members to develop, test,
-                                    and deploy web applications.
-                                </p>
-                                <p className="size">
-                                    13. Problem Solving: Identifying and resolving technical
-                                    issues and challenges in a dynamic development environment.
-                                </p>
-                                <p className="size">
-                                    14. Staying Informed: Keeping up to date with the latest
-                                    technologies and best practices in web development.
-                                </p>
-                                <p className="size">
-                                    15. Continuous Learning: Taking advantage of the internship as
-                                    a learning opportunity, seeking guidance from mentors, and
-                                    expanding your technical skills.
-                                </p>
-                            </ul>
-
-                            <p className="size">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We expect
-                                you to maintain a high standard of professionalism and adhere to
-                                our company's policies and procedures throughout your
-                                internship. This is a paid internship position.
-                            </p>
-
-                            <p className="size">
-                                Please review this offer letter carefully and, if you accept our
-                                offer, share your response on WhatsApp.
-                            </p>
-
-                            <p className="size">
-                                We are excited about the prospect of having you join our team
-                                and look forward to a mutually beneficial partnership.
-                            </p>
-
-                            <p className="lettername"><span className="text">Sincerely,</span></p>
-                            <p className="lettername"><span className="text">Mr. Sanket Ghodake,</span></p>
-                            <p className="lettername"><span className="text">Founder & CEO</span></p>
-                            <img src={sign} alt="sign" className="sign" />
-          
-        </div>
-                </div>
-            )}
-
-
-
-            {/* Acceptance of Offer Section */}
-            {last && (
+                    
+                    {last && (
                 <div className="offerletter2">
                     <div className="new-div">
                         <p className="lettername"><span className="text">Acceptance of Offer:</span></p>
@@ -296,13 +301,23 @@ export default function OfferletterData() {
                         <p className="size">Date: </p>
                     </div>
                 </div>
+                
             )}
-            
+                  
+       
+                    <div className="form-actions">
+                        <button className="cancel-btn" onClick={() => setIsViewModalOpen(false)}>
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
+       
 
             {/* Update Modal */}
-        {isModalOpen && (
+            {isModalOpen && (
                 <div className="modal-overlay">
-                    <div className="modal-content" style={{ maxHeight: "90vh", maxWidth: "40vw", marginTop:"40px", overflowY: "auto" }}>
+                    <div className="modal-content" style={{ maxHeight: "90vh", maxWidth: "40vw", marginTop: "40px", overflowY: "auto" }}>
                         <h2>Update Offer Letter</h2>
 
                         <div className="form-group">
@@ -415,8 +430,18 @@ export default function OfferletterData() {
                     </div>
                 </div>
             )}
-
-            <ToastContainer />
         </>
     );
 }
+
+
+
+
+
+
+
+
+
+
+
+
