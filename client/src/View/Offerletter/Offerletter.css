@@ -2,12 +2,13 @@
 .custom-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 100px 10px;
+    margin: 90px 10px;
+    text-align: center;
 }
 
 .custom-table th, .custom-table td {
-    padding: 12px 15px;
-    text-align: left;
+    padding: 10px 10px;
+    /* text-align: left; */
     border: 1px solid #ddd;
 }
 
@@ -17,9 +18,8 @@
 }
 
 .action-btn {
-    background-color:black;
-    color: white;
-    padding: 5px 10px;
+    /* background-color:black; */
+  
     border: none;
     cursor: pointer;
     margin: 5px;
@@ -29,12 +29,7 @@
 
 }
 
-.action-btn:hover {
-    background-color: white;
-    color:black;
-    border-radius: 10px;
-    border: 1px solid black;
-}
+
 
 /* Modal styling */
 .modal-overlay {
@@ -47,14 +42,35 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
+
+
+
+.edit-icon{
+    height: 20px;
+    width: 20px;
+    margin: 2px;
+
+}
+
+.salary{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
 
 .modal-content {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
-    width: 500px;
-}
+    /* width:100vw */
+    max-height: 90vh;
+     max-width: 70vw;
+     /* marginTop: "40px", */
+    overflow-y: auto;
+    }
 
 .form-group {
     margin-bottom: 15px;
@@ -85,8 +101,16 @@
     margin-left: 10px;
 }
 
+
+
+.sirsign{
+    height: 50px;
+    width:150px;
+    /* border: 1px solid black; */
+}
 .cancel-btn {
-    background-color: rgb(92, 148, 212);
+    background-color:red;
+    text-align: center;
     color: white;
 }
 
