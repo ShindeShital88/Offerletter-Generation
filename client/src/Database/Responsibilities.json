@@ -1,0 +1,132 @@
+{
+  "roles": [
+    {
+      "role": "Software Developer/Engineer",
+      "responsibility": {
+        "1": "Design & Development: Work on software design by understanding requirements, breaking them down into modules, and developing them using programming languages (e.g., Java, Python, C#).",
+        "2": "Testing: Write and execute tests (unit tests, integration tests) to ensure code quality and bug-free functionality.",
+        "3": "Deployment & Maintenance: Deploy the software to various environments (e.g., development, testing, production), and provide support for maintaining and updating the system post-deployment.",
+        "4": "Collaboration: Work closely with other developers, designers, and stakeholders to implement new features and enhance existing functionality.",
+        "5": "Documentation: Create and maintain technical documentation (code documentation, architecture diagrams) for future reference."
+      }
+    },
+    {
+      "role": "Front-End Developer",
+      "responsibility": {
+        "1": "UI Implementation: Translate UI/UX designs into functional web pages using HTML, CSS, and JavaScript.",
+        "2": "Frameworks & Libraries: Use front-end frameworks/libraries like React, Angular, or Vue to build modular, scalable web applications.",
+        "3": "Responsive Design: Ensure that the application is mobile-friendly and works across different browsers and devices.",
+        "4": "User Experience: Improve user interaction with the application by enhancing the design, layout, and functionality to provide a seamless experience.",
+        "5": "Performance Optimization: Implement techniques like lazy loading, minification, and caching to improve website performance.",
+        "6": "Version Control: Use tools like Git for version control, ensuring smooth collaboration and rollback capabilities."
+      }
+    },
+    {
+      "role": "Back-End Developer",
+      "responsibility": {
+        "1": "Server-Side Logic: Develop server-side applications and handle the business logic, databases, and server configurations.",
+        "2": "APIs: Build and integrate RESTful APIs that interact with the front end to provide data, such as retrieving information from a database or processing user requests.",
+        "3": "Database Management: Design and optimize databases (SQL or NoSQL) for efficient data storage, retrieval, and manipulation.",
+        "4": "Security: Implement security best practices like authentication, authorization, data encryption, and securing endpoints from external threats.",
+        "5": "Performance Tuning: Optimize server performance, including load balancing, caching mechanisms, and managing server resources.",
+        "6": "Cloud Integration: Deploy applications on cloud platforms (AWS, Azure, GCP), manage cloud infrastructure, and use tools like Docker and Kubernetes for containerization and orchestration."
+      }
+    },
+    {
+      "role": "Full-Stack Developer",
+      "responsibility": {
+        "1": "Front-End & Back-End Development: Handle both client-side (UI) and server-side (business logic) development, allowing them to work across the entire application.",
+        "2": "Database Integration: Design and integrate databases into the application, optimizing data retrieval and storage.",
+        "3": "API Design & Integration: Develop both internal and external APIs to facilitate communication between different parts of the system (client, server, third-party services).",
+        "4": "Version Control: Manage the codebase using Git or other version control systems to track changes and collaborate with team members.",
+        "5": "Debugging & Testing: Test the application end-to-end, including both front-end and back-end components, and debug issues wherever they occur.",
+        "6": "Deployment: Work on deploying the entire application stack to production environments, often using CI/CD pipelines."
+      }
+    },
+    {
+      "role": "DevOps Engineer",
+      "responsibility": {
+        "1": "CI/CD Pipelines: Automate software development processes (building, testing, deploying) through continuous integration and continuous delivery (CI/CD) pipelines.",
+        "2": "Infrastructure as Code (IaC): Use tools like Terraform, Ansible, or CloudFormation to automate and manage cloud infrastructure.",
+        "3": "Containerization & Orchestration: Use Docker to containerize applications and Kubernetes for orchestrating and scaling them in production.",
+        "4": "Monitoring & Logging: Set up monitoring tools (Prometheus, Grafana) to track application performance, detect issues, and provide logging for auditing and troubleshooting.",
+        "5": "Automation: Automate repetitive tasks such as server provisioning, deployments, and backups to increase efficiency.",
+        "6": "Security & Compliance: Implement security practices like vulnerability scans, SSL certificates, firewalls, and encryption for cloud environments."
+      }
+    },
+    {
+      "role": "QA Engineer/Tester",
+      "responsibility": {
+        "1": "Test Planning: Develop a comprehensive test plan that includes various testing strategies (functional, performance, security) to ensure software quality.",
+        "2": "Manual Testing: Execute manual test cases to validate that the software meets the specified requirements and works as expected.",
+        "3": "Automated Testing: Write scripts for automated tests (e.g., Selenium, JUnit) that can run frequently to detect issues early in the development cycle.",
+        "4": "Bug Reporting: Identify defects in the software and log them in a tracking tool like Jira, providing developers with detailed steps to reproduce the issue.",
+        "5": "Regression Testing: Ensure that new code changes do not break existing features by running regression tests on the system.",
+        "6": "Performance & Load Testing: Simulate different user loads and performance scenarios to check if the system scales and performs under pressure."
+      }
+    },
+    {
+      "role": "UI/UX Designer",
+      "responsibility": {
+        "1": "User Research: Conduct user research (surveys, interviews, usability tests) to understand user needs and behavior, which guides the design process.",
+        "2": "Wireframing & Prototyping: Create wireframes and interactive prototypes that visualize the layout and functionality of the user interface.",
+        "3": "Design Systems: Develop design systems with reusable components to ensure consistency across different parts of the application.",
+        "4": "User Testing: Test designs with real users to gather feedback and make improvements.",
+        "5": "Collaboration with Developers: Work closely with front-end developers to ensure designs are accurately implemented in the final product.",
+        "6": "Accessibility: Design for inclusivity, ensuring that applications are accessible to users with disabilities (e.g., screen readers, contrast settings)."
+      }
+    },
+    {
+      "role": "Project Manager",
+      "responsibility": {
+        "1": "Project Planning: Define project scope, timelines, deliverables, and resources based on client requirements.",
+        "2": "Risk Management: Identify potential risks, assess their impact, and develop mitigation strategies to prevent or minimize disruptions.",
+        "3": "Team Coordination: Allocate tasks to team members, ensure alignment between teams (development, design, QA), and resolve conflicts as they arise.",
+        "4": "Communication: Act as a bridge between clients, stakeholders, and development teams to ensure clear communication throughout the project.",
+        "5": "Progress Tracking: Use project management tools (e.g., Jira, Trello) to track progress, monitor deadlines, and ensure timely delivery.",
+        "6": "Quality Control: Review project deliverables at each stage to ensure they meet quality standards and client expectations."
+      }
+    },
+    {
+      "role": "Product Manager",
+      "responsibility": {
+        "1": "Product Strategy: Define the overall product strategy and roadmap, aligning with the company’s long-term business goals.",
+        "2": "Requirement Gathering: Collect and prioritize product requirements based on customer needs, market research, and stakeholder input.",
+        "3": "Feature Prioritization: Balance competing priorities by determining which features should be built first, based on their impact and feasibility.",
+        "4": "Collaboration: Work closely with engineering, design, sales, and marketing teams to ensure smooth product development and launch.",
+        "5": "Performance Metrics: Track product performance through metrics like user engagement, retention, and revenue, and iterate on the product based on these insights.",
+        "6": "Stakeholder Communication: Regularly communicate product updates and progress to stakeholders, ensuring alignment on goals and deliverables."
+      }
+    },
+    {
+      "role": "System Administrator (SysAdmin)",
+      "responsibility": {
+        "1": "System Setup: Configure and install servers, network devices, and other IT infrastructure.",
+        "2": "System Monitoring: Monitor server performance and availability, ensuring systems are running optimally without downtime.",
+        "3": "Troubleshooting: Diagnose and resolve hardware or software issues that impact the availability or performance of IT systems.",
+        "4": "Security Management: Apply security patches, configure firewalls, and enforce security policies to protect systems from threats.",
+        "5": "Backup & Recovery: Manage backups and implement disaster recovery plans to ensure data is not lost and can be restored in case of failure."
+      }
+    },
+    {
+      "role": "Database Administrator (DBA)",
+      "responsibility": {
+        "1": "Database Design: Design and structure databases for optimal storage, retrieval, and integrity.",
+        "2": "Performance Tuning: Optimize query performance by indexing, optimizing queries, and configuring database parameters.",
+        "3": "Backup & Recovery: Implement backup strategies and manage disaster recovery processes to ensure data protection.",
+        "4": "Security: Control database access, ensure data encryption, and protect against vulnerabilities.",
+        "5": "Maintenance: Perform regular database maintenance tasks like defragmenting, cleaning up old data, and upgrading software."
+      }
+    },
+    {
+      "role": "Network Engineer",
+      "responsibility": {
+        "1": "Network Design: Design and implement network architectures that support the business needs, ensuring scalability and security.",
+        "2": "Configuration: Configure routers, switches, and firewalls to ensure secure and efficient network communication.",
+        "3": "Troubleshooting: Diagnose and resolve network issues, ensuring minimal downtime and performance disruption.",
+        "4": "Security: Implement network security measures such as firewalls, VPNs, and encryption to protect data transmission.",
+        "5": "Monitoring & Maintenance: Monitor network performance, apply patches, and upgrade network devices to maintain optimal performance."
+      }
+    }
+  ]
+}

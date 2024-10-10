@@ -14,6 +14,17 @@
     display:flex;
     justify-content: space-evenly;
     margin:40px;
+    /* border: 2px solid black; */
+  }
+
+  .block2{
+    display:flex;
+    justify-content: start;
+    margin:40px;
+    /* border: 2px solid black; */
+  }
+  .block3{
+    margin: 0 60px;
   }
   
   .allinput{

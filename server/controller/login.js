@@ -1,50 +1,68 @@
 import Login from "../Models/Login.js";
+import generateToken from "../utils/generateToken.js";
+ 
+// Signup User
+export const registerUser = async (req, res) => {
+  const { name, email, password } = req.body;
 
+  const userExists = await Login.findOne({ email });
+  if (userExists) {
+    return res.status(400).json({ message: "User already exists" });
+  }
+
+  const user = await Login.create({ name, email, password });
+
+  if (user) {
+    res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(400).json({ message: "Invalid user data" });
+  }
+};
 
 export const UserLogin = async (req, res) => {
-    const { UserName, Email, Password } = req.body;
+  const { email, password } = req.body;
 
-    try {
-        // Create a new form document
-        const newForm = await Login.create({
-            UserName,
-            Email,
-            Password
+  const user = await Login.findOne({ email });
 
-        });
+  if (user && (await user.matchPassword(password))) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(401).json({ message: "Invalid email or password" });
+  }
+};
 
-        // Respond with success and the created document
-        res.json({
-            success: true,
-            data: newForm,
-            msg: 'Login  successfully',
-        });
-    } catch (error) {
-        // Handle any errors during the database operation
-        res.status(500).json({
-            success: false,
-            msg: error.message,
-        });
-    }
+export const logoutUser = (req, res) => {
+  res.json({ message: 'Logged out successfully' });
 };
 
 
+
 export const GetAllData = async (req, res) => {
-    try {
-      // Fetch all the documents from the 'Form' collection
-      const login = await Login.find();
-  
-      // Respond with the fetched data
-      res.json({
-        success: true,
-        data: login,
-        msg: 'login data successfully',
-      });
-    } catch (error) {
-      // Handle any errors during the database operation
-      res.status(500).json({
-        success: false,
-        msg: error.message,
-      });
-    }
-  };
+  try {
+    // Fetch all the documents from the 'Form' collection
+    const login = await Login.find();
+
+    // Respond with the fetched data
+    res.json({
+      success: true,
+      data: login,
+      msg: "login data successfully",
+    });
+  } catch (error) {
+    // Handle any errors during the database operation
+    res.status(500).json({
+      success: false,
+      msg: error.message,
+    });
+  }
+};
