@@ -10,11 +10,11 @@ const routes =createBrowserRouter([
 
 
 {
-    path:'/',
+    path:'/form',
     element:<CertificateForm/>
 },
 {
-    path:'/Login',
+    path:'/',
     element:<Login/>
 },
 {

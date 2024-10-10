@@ -145,7 +145,9 @@ export default function CertificateForm() {
                 <option value="Employee">Employee</option>
                 <option value="Team Leader">Team Leader</option>
                 <option value="Project Manager">Project Manager</option>
-                <option value="Senior Project Manager">Senior Project Manager</option>
+                <option value="Senior Project Manager">
+                  Senior Project Manager
+                </option>
               </select>
             </div>
 
@@ -163,15 +165,39 @@ export default function CertificateForm() {
                 className="allinput"
               >
                 <option value="">Select Role</option>
+
+                <option value="Software Developer/Engineer">
+                  Software Developer/Engineer
+                </option>
+                <option value="Data Analyst">Data Analyst</option>
+                <option value="System Administrator">
+                  System Administrator
+                </option>
+                <option value="Business Analyst">Business Analyst</option>
+                <option value="Quality Assurance Tester">
+                  Quality Assurance Tester
+                </option>
+                <option value="DevOps Engineer">DevOps Engineer</option>
+                <option value="UI/UX Designer">UI/UX Designer</option>
+                <option value="Network Engineer">Network Engineer</option>
+                <option value="Technical Support Specialist">
+                  Technical Support Specialist
+                </option>
+                <option value="Security Analyst">Security Analyst</option>
+                <option value="Cloud Engineer">Cloud Engineer</option>
+                <option value="SEO Specialist">SEO Specialist</option>
+                <option value="Mobile App Developer">
+                  Mobile App Developer
+                </option>
+                <option value="Game Developer">Game Developer</option>
+                <option value="Database Administrator">
+                  Database Administrator
+                </option>
                 <option value="Full Stack Developer">
                   Full Stack Developer
                 </option>
-                <option value="Frontend Developer">Frontend Developer</option>
                 <option value="Backend Developer">Backend Developer</option>
-                <option value="UI/UX Developer">UI/UX Developer</option>
-                <option value="Java Developer">Java Developer</option>
-                <option value="Python Developer">Python Developer</option>
-                <option value="DevOps Developer">DevOps Developer</option>
+                <option value="Frontend Developer">Frontend Developer</option>
               </select>
             </div>
           </div>
@@ -211,8 +237,8 @@ export default function CertificateForm() {
           </div>
 
           {range !== "Range" ? (
-            <div className="block">
-              <div>
+            <div className="block2">
+              <div className="block3">
                 <span className="name"> Salary :</span> <br />
                 <input
                   type="text"

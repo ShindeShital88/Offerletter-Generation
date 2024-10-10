@@ -4,6 +4,12 @@ import './Navbar.css';
 import img from './logo.webp';
 
 function Navbar() {
+
+  const Logout =()=>{
+    localStorage.removeItem('customer');
+    window.location.href = '/';
+  }
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top barmain">
@@ -33,7 +39,7 @@ function Navbar() {
                 <a className="nav-link space" href="/OfferletterData">OfferletterData</a>
               </li>
               <li className="nav-item ms-4">
-                <a className="nav-link space" href="/Login">Login</a>
+                <a className="nav-link space" onClick={Logout}>Logout</a>
               </li>
             </ul>
           </div>

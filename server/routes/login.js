@@ -1,12 +1,17 @@
 import express from "express";
-import { GetAllData, UserLogin } from "../controller/login.js";
+import {
+  registerUser,
+  UserLogin,
+  GetAllData,
+  logoutUser,
+} from "../controller/login.js";
 
+const LoginRoutes = express.Router();
 
-const LoginRoutes=express.Router()
+LoginRoutes.post("/sign", registerUser);
+LoginRoutes.post("/login", UserLogin);
+LoginRoutes.post("/logout", logoutUser);
 
-LoginRoutes.post("/login",UserLogin)
+LoginRoutes.get("/logins", GetAllData);
 
-
-LoginRoutes.get("/logins",GetAllData)
-
-export default LoginRoutes
+export default LoginRoutes;
